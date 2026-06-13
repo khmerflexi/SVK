@@ -1,0 +1,29 @@
+
+<JavaScript>
+
+const CACHE_NAME = 'realty-age-cache-v1';
+const urlsToCache = [
+  '/',
+  '/?utm_source=pwa',
+  '/search'
+];
+
+// ដំឡើង Service Worker និងរក្សាទុក Cache
+self.addEventListener('install', event => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(cache => {
+      return cache.addAll(urlsToCache);
+    })
+  );
+});
+
+// ទាញយកទិន្នន័យពី Cache ពេលគ្មានអ៊ីនធឺណិត
+self.addEventListener('fetch', event => {
+  event.respondWith(
+    caches.match(event.request).then(response => {
+      return response || fetch(event.request);
+    })
+  );
+});
+
+</JavaScript>
