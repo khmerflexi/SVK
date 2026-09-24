@@ -1,0 +1,22 @@
+{
+  "name": "DG SAR",
+  "short_name": "DG SAR",
+  "description": "DG SAR ជាសារ Digital ចែករំលែកប្រភពព័ត៌មានវិភាគ សេដ្ឋកិច្ច បច្ចេកវិទ្យា និងចំណេះដឹងទូទៅ។",
+  "start_url": "/?utm_source=pwa",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ff6f00",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjMGDAKUWal8UWzVq85u1i_GDvIoF6T55TaWz0MF-V-bmy-pRWE3PDVoM8NyOccbSTfxMOVuTODtKTZL1EAsRltbN41uMTzSzV1Tl4uJkcbgItJ7saiHvqQLYwraBkmcWc8RFTvizSoeUdhVpfDESneFcD-O08zXZLuNZGhJiaS2Y5KBFUnHn4090gScY1x/s1600/DG-SAR-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgwQUGns0wYdyOoS_D51R2u3k5FtKVzO25YiLP5vxHr_vL7GGq9j4qkHQii8HcmGeOxjyVVyJcLCUXzxEuq8N8mtYxWxcEfqwkGbejwjshFlFdUWhUZdE8rXq7xP3tvCIudSgaJ6eLbd4unOxalMrB3ZTrHvl7I7KxmcU9xgDjNYDAS-ERQTYw4UPXXuBR0/s1600/DG-SAR-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
