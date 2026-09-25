@@ -1,3 +1,14 @@
+
+
+
+
+
+
+
+
+
+
+
 {
   "name": "DG SAR",
   "short_name": "DG SAR",
@@ -9,7 +20,7 @@
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjMGDAKUWal8UWzVq85u1i_GDvIoF6T55TaWz0MF-V-bmy-pRWE3PDVoM8NyOccbSTfxMOVuTODtKTZL1EAsRltbN41uMTzSzV1Tl4uJkcbgItJ7saiHvqQLYwraBkmcWc8RFTvizSoeUdhVpfDESneFcD-O08zXZLuNZGhJiaS2Y5KBFUnHn4090gScY1x/s1600/DG-SAR-192.png",
+      "src": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjZlv8GQCCVtivNUSi6udH0E80iACrD7KFg3by7uFZ6wiqjof7l0R2tWWakK1OH_h2JbRVJmXk89gCK101GR88tNyxLbD6-r4a5BbkMffonVr7OyTNDQsNOJ4ukFtUzz8l_JpvcbOhKjiO69fXQAVQpu-Z9fe4aA5OCg4KSGKbp4162-2PueMurSnkYWDft/s1600/Digital-news-192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
