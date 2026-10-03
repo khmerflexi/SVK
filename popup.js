@@ -1,18 +1,19 @@
-// === ផ្នែកទី១៖ កូដ Reading Popup (លោតពេល Scroll បាន 20%) ===
+// === ផ្នែកទី១៖ កូដ Reading Popup (លោតពេល Scroll បាន 20% រាល់ពេល Refresh) ===
 (function() {
-  if (sessionStorage.getItem('rpShown')) { return; }
-
   var popup = document.getElementById('reading-popup');
   if (!popup) { return; }
 
+  var rpShown = false; // ចងចាំតែក្នុងទំព័រនេះ (បាត់ពេល Refresh)
+
   function showReadingPopup() {
+    if (rpShown) { return; }
+    rpShown = true;
     popup.style.display = 'flex';
     popup.style.opacity = '0';
     setTimeout(function() {
       popup.style.transition = 'opacity 0.4s ease';
       popup.style.opacity = '1';
     }, 10);
-    sessionStorage.setItem('rpShown', '1');
     window.removeEventListener('scroll', checkReadingScroll);
   }
 
