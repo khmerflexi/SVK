@@ -126,12 +126,14 @@
   .rp-new-price { font-size: 24px; }
 
   #custom-popup-box { padding: 14px; }
+
   #custom-popup-box #popup-close-btn {
-    top: 24px !important;
-    right: 24px !important;
-    width: 34px !important;
-    height: 34px !important;
-    font-size: 22px !important;
+    top: 10px !important;
+    right: 12px !important;
+    width: 30px !important;
+    height: 30px !important;
+    font-size: 18px !important;
   }
+
   .sidebar-property-features { font-size: 13px; gap: 8px 12px; }
 }
