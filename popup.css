@@ -71,30 +71,30 @@
 /* ប៊ូតុងបិទ (Close X) — នៅលើជ្រុងរូបភាព */
 
 /* ប៊ូតុងបិទ — ដូចរចនាបថ Watch popup */
+/* ប៊ូតុងបិទ — ដូចរចនាបថ Watch popup */
 #custom-popup-box #popup-close-btn {
   position: absolute !important;
   top: 10px !important;
-  right: 10px !important;
-  width: 34px !important;
-  height: 34px !important;
+  right: 12px !important;
+  width: 30px !important;
+  height: 30px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   font-family: Arial, sans-serif !important;
-  font-size: 22px !important;
+  font-size: 18px !important;
   line-height: 1 !important;
   font-weight: normal !important;
   color: #fff !important;
-  background: #1a1a2e !important;
+  background: rgba(0, 0, 0, 0.4) !important;
+  border: none !important;
   border-radius: 50% !important;
   cursor: pointer !important;
-  z-index: 50 !important;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.35) !important;
+  z-index: 10 !important;
 }
 #custom-popup-box #popup-close-btn:hover {
-  background: #ff4400 !important;
+  background: rgba(0, 0, 0, 0.7) !important;
 }
-
 /* Bed room & Bath room */
 .sidebar-property-features {
   display: flex;
