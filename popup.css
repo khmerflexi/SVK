@@ -70,34 +70,26 @@
 
 /* ប៊ូតុងបិទ (Close X) — នៅលើជ្រុងរូបភាព */
 
-#custom-popup-box #popup-close-btn{
-  position:absolute!important;top:32px!important;right:32px!important;
-  width:36px!important;height:36px!important;
-  display:flex!important;align-items:center!important;justify-content:center!important;
-  font-family:Arial,sans-serif!important;font-size:24px!important;line-height:1!important;
-  color:#fff!important;background:rgba(0,0,0,.6)!important;
-  border-radius:50%!important;cursor:pointer!important;z-index:50!important;
-}
+/* ប៊ូតុងបិទ — ដូចរចនាបថ Watch popup */
 #custom-popup-box #popup-close-btn {
   position: absolute !important;
-  top: 32px !important;
-  right: 32px !important;
-  width: 36px !important;
-  height: 36px !important;
+  top: 10px !important;
+  right: 10px !important;
+  width: 34px !important;
+  height: 34px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   font-family: Arial, sans-serif !important;
-  font-size: 24px !important;
+  font-size: 22px !important;
   line-height: 1 !important;
-  font-weight: bold !important;
+  font-weight: normal !important;
   color: #fff !important;
-  background: rgba(0, 0, 0, 0.6) !important;
+  background: #1a1a2e !important;
   border-radius: 50% !important;
   cursor: pointer !important;
   z-index: 50 !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35) !important;
-  transition: background 0.2s !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.35) !important;
 }
 #custom-popup-box #popup-close-btn:hover {
   background: #ff4400 !important;
