@@ -1,15 +1,18 @@
 /* Audio Reader — អានអត្ថបទជាភាសាខ្មែរ (Web Speech API) */
 (function () {
-  var src = document.querySelector('.post-body') || document.querySelector('article');
+ function init() {
+  if (document.getElementById('tts-bar')) { return; }
+  var src = document.querySelector('.post-body, .entry-content, article');
   if (!src) { return; }
+  console.log('[Audio Reader] loaded');
 
   var css = '' +
-    '#tts-bar{position:fixed;left:0;right:0;bottom:0;z-index:9000;background:#fff;' +
+    '#tts-bar{position:fixed!important;left:0!important;right:0!important;bottom:0!important;z-index:99990!important;display:block!important;visibility:visible!important;opacity:1!important;background:#fff;' +
     'box-shadow:0 -3px 14px rgba(0,0,0,.12);text-align:center;box-sizing:border-box;' +
     'padding:14px 84px 14px 14px;padding-bottom:calc(14px + env(safe-area-inset-bottom,0px));' +
     'font-family:"Kantumruy Pro",sans-serif}' +
-    '#tts-btn{position:absolute;right:16px;top:-74px;width:58px;height:58px;' +
-    'border-radius:50%;border:none;background:#0a0a0a;cursor:pointer;display:flex;align-items:center;' +
+    '#tts-btn{position:absolute!important;right:16px!important;top:-74px!important;width:58px!important;height:58px!important;margin:0!important;' +
+    'border-radius:50%!important;border:none!important;background:#0a0a0a!important;cursor:pointer;display:flex!important;align-items:center;' +
     'justify-content:center;padding:0;box-shadow:0 0 0 6px #e2e8f0,0 6px 16px rgba(0,0,0,.25);' +
     'transition:transform .2s}' +
     '#tts-btn:active{transform:scale(.92)}' +
@@ -28,7 +31,7 @@
 
   var bar = document.createElement('div');
   bar.id = 'tts-bar';
-  bar.innerHTML = '<button id="tts-btn" aria-label="Play">' + PLAY + '</button>' +
+  bar.innerHTML = '<button type="button" id="tts-btn" aria-label="Play">' + PLAY + '</button>' +
     '<span id="tts-msg">ចុច ▶ ដើម្បីស្តាប់អត្ថបទ</span><div id="tts-prog"><i></i></div>';
   document.body.appendChild(bar);
 
@@ -113,4 +116,7 @@
   btn.addEventListener('click', function () { playing ? pause() : start(); });
   window.addEventListener('pagehide', function () { if (synth) { synth.cancel(); } });
   if (synth && synth.onvoiceschanged !== undefined) { synth.onvoiceschanged = function () {}; }
+ }
+ if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); }
+ else { init(); }
 })();
