@@ -1,122 +1,51 @@
-/* Audio Reader — អានអត្ថបទជាភាសាខ្មែរ (Web Speech API) */
-(function () {
- function init() {
-  if (document.getElementById('tts-bar')) { return; }
-  var src = document.querySelector('.post-body, .entry-content, article');
-  if (!src) { return; }
-  console.log('[Audio Reader] loaded');
-
-  var css = '' +
-    '#tts-bar{position:fixed!important;left:0!important;right:0!important;bottom:0!important;z-index:99990!important;display:block!important;visibility:visible!important;opacity:1!important;background:#fff;' +
-    'box-shadow:0 -3px 14px rgba(0,0,0,.12);text-align:center;box-sizing:border-box;' +
-    'padding:14px 84px 14px 14px;padding-bottom:calc(14px + env(safe-area-inset-bottom,0px));' +
-    'font-family:"Kantumruy Pro",sans-serif}' +
-    '#tts-btn{position:absolute!important;right:16px!important;top:-74px!important;width:58px!important;height:58px!important;margin:0!important;' +
-    'border-radius:50%!important;border:none!important;background:#0a0a0a!important;cursor:pointer;display:flex!important;align-items:center;' +
-    'justify-content:center;padding:0;box-shadow:0 0 0 6px #e2e8f0,0 6px 16px rgba(0,0,0,.25);' +
-    'transition:transform .2s}' +
-    '#tts-btn:active{transform:scale(.92)}' +
-    '#tts-btn svg{width:24px;height:24px;fill:#fff}' +
-    '#tts-btn.playing{box-shadow:0 0 0 6px #ffd2b8,0 6px 16px rgba(0,0,0,.25)}' +
-    '#tts-msg{font-size:13px;color:#444;display:block;line-height:1.4;text-align:left}' +
-    '#tts-prog{position:absolute;left:0;right:0;bottom:0;height:3px;background:#eee}' +
-    '#tts-prog i{display:block;height:100%;width:0;background:#f60;transition:width .3s}' +
-    'body{padding-bottom:70px!important}';
-  var st = document.createElement('style');
-  st.textContent = css;
-  document.head.appendChild(st);
-
-  var PLAY = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
-  var PAUSE = '<svg viewBox="0 0 24 24"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>';
-
-  var bar = document.createElement('div');
-  bar.id = 'tts-bar';
-  bar.innerHTML = '<button type="button" id="tts-btn" aria-label="Play">' + PLAY + '</button>' +
-    '<span id="tts-msg">ចុច ▶ ដើម្បីស្តាប់អត្ថបទ</span><div id="tts-prog"><i></i></div>';
-  document.body.appendChild(bar);
-
-  var btn = document.getElementById('tts-btn');
-  var msg = document.getElementById('tts-msg');
-  var fill = bar.querySelector('#tts-prog i');
-  var synth = ('speechSynthesis' in window) ? window.speechSynthesis : null;
-  var chunks = [], idx = 0, playing = false, sid = 0;
-
-  function buildChunks() {
-    var c = src.cloneNode(true);
-    c.querySelectorAll('script,style,pre,iframe,#custom-popup-overlay,#reading-popup,#tts-bar').forEach(function (n) { n.remove(); });
-    var text = c.textContent.replace(/\s+/g, ' ').trim();
-    var parts = text.match(/[^។៕?!.]+[។៕?!.]?/g) || [text];
-    var out = [], cur = '';
-    parts.forEach(function (p) {
-      if ((cur + p).length > 170 && cur) { out.push(cur); cur = p; } else { cur += p; }
-    });
-    if (cur) { out.push(cur); }
-    return out;
+function toggleReadPost() {
+  // ពិនិត្យមើលថាតើ Browser គាំទ្រ Web Speech API ដែរឬទេ
+  if (!('speechSynthesis' in window)) {
+    alert('សូមអភ័យទោស! Browser របស់អ្នកមិនគាំទ្រមុខងារអានអត្ថបទនេះទេ។');
+    return;
   }
 
-  function getKhmerVoice() {
-    if (!synth) { return null; }
-    var v = synth.getVoices();
-    for (var i = 0; i < v.length; i++) { if (/^km/i.test(v[i].lang)) { return v[i]; } }
-    return v.length ? null : undefined; // null = មានសំឡេងផ្សេង តែគ្មានខ្មែរ, undefined = មិនទាន់ផ្ទុក
+  // ប្រសិនបើកំពុងអាន ឱ្យវាหยุด (Stop)
+  if (window.speechSynthesis.speaking) {
+    window.speechSynthesis.cancel();
+    updateReadButtonState(false);
+    return;
   }
 
-  function setUI(on) {
-    playing = on;
-    btn.innerHTML = on ? PAUSE : PLAY;
-    btn.classList.toggle('playing', on);
+  // ດึงយកអត្ថបទពីក្នុង Post (สมมติว่าអត្ថបទស្ថិតក្នុង class ឈ្មោះ .post-body)
+  var postBody = document.querySelector('.post-body');
+  if (!postBody) {
+    alert('រកមិនឃើញអត្ថបទសម្រាប់អានទេ។');
+    return;
   }
 
-  function speak(mySid) {
-    if (mySid !== sid || !playing) { return; }
-    if (idx >= chunks.length) { idx = 0; setUI(false); msg.textContent = 'អានចប់ហើយ'; fill.style.width = '100%'; return; }
-    var u = new SpeechSynthesisUtterance(chunks[idx]);
-    u.lang = 'km-KH';
-    u.rate = 0.95;
-    var kv = getKhmerVoice();
-    if (kv) { u.voice = kv; }
-    u.onend = function () {
-      if (mySid !== sid) { return; }
-      idx++;
-      fill.style.width = Math.round(idx / chunks.length * 100) + '%';
-      speak(mySid);
-    };
-    u.onerror = function (e) {
-      if (mySid !== sid || e.error === 'canceled' || e.error === 'interrupted') { return; }
-      setUI(false);
-      msg.textContent = 'មិនអាចអានបាន (' + e.error + ')';
-    };
-    synth.speak(u);
-  }
+  var textToRead = postBody.innerText || postBody.textContent;
 
-  function start() {
-    if (!synth) {
-      msg.textContent = 'កម្មវិធីបើកនេះមិនគាំទ្រការអាន — សូមបើកក្នុង Chrome';
-      return;
-    }
-    if (!chunks.length) { chunks = buildChunks(); }
-    if (getKhmerVoice() === null) {
-      msg.textContent = 'ឧបករណ៍នេះមិនមានសំឡេងខ្មែរ — សូមសាកល្បងលើ Chrome ទូរសព្ទ Android';
-      return;
-    }
-    sid++;
-    setUI(true);
-    msg.textContent = 'កំពុងអាន… ចុចម្តងទៀតដើម្បីផ្អាក';
-    synth.cancel();
-    speak(sid);
-  }
+  // កំណត់ការអាន
+  var utterance = new SpeechSynthesisUtterance(textToRead);
+  utterance.lang = 'km-KH'; // កំណត់ភាសាខ្មែរ
+  utterance.rate = 1.0;     // ល្បឿននៃការអាន (អាចកែសម្រួលបាន 0.8 ដល់ 1.2)
+  utterance.pitch = 1.0;    // កម្រិតសម្លេង
 
-  function pause() {
-    sid++;
-    if (synth) { synth.cancel(); }
-    setUI(false);
-    msg.textContent = 'ផ្អាក — ចុច ▶ ដើម្បីបន្ត';
-  }
+  // ពេលចាប់ផ្តើមអាន
+  utterance.onstart = function() {
+    updateReadButtonState(true);
+  };
 
-  btn.addEventListener('click', function () { playing ? pause() : start(); });
-  window.addEventListener('pagehide', function () { if (synth) { synth.cancel(); } });
-  if (synth && synth.onvoiceschanged !== undefined) { synth.onvoiceschanged = function () {}; }
- }
- if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); }
- else { init(); }
-})();
+  // ពេលអានចប់
+  utterance.onend = function() {
+    updateReadButtonState(false);
+  };
+
+  // ចាប់ផ្តើមបញ្ជាឱ្យអាន
+  window.speechSynthesis.speak(utterance);
+}
+
+// មុខងារប្តូររូបរាង ឬអត្ថន័យប៊ូតុង (អាចមាន ឬអត់ក៏បាន)
+fn = updateReadButtonState(isReading);
+function updateReadButtonState(isReading) {
+  var btn = document.getElementById('read-audio-btn');
+  if (btn) {
+    btn.innerText = isReading ? '⏹ បញ្ឈប់ការអាន' : '🔊 ស្តាប់អត្ថបទនេះ';
+  }
+}
