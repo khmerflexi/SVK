@@ -48,41 +48,51 @@ function closeReadingPopup() {
 
 
 // === ផ្នែកទី២៖ កូដ Custom Popup (លោតពេល Scroll បាន 30%) ===
+
 (function() {
   var overlay = document.getElementById('custom-popup-overlay');
-  if (!overlay) { return; }
+  var box = document.getElementById('custom-popup-box');
+  if (!overlay || !box) { return; }
 
-  var popupShown = false;
+  var SHOW_AT = 30; // % scroll
+  var shown = false;
+  var closed = false;
+
+  box.style.opacity = '0';
+  box.style.animation = 'none';
 
   function showCustomPopup() {
-    overlay.style.display = 'flex';
-    popupShown = true;
+    shown = true;
     window.removeEventListener('scroll', checkCustomScroll);
+
+    overlay.style.display = 'flex';
+    box.style.transform = 'scale(0.9)';
+    void box.offsetWidth; // បង្ខំ browser គណនា style មុន
+
+    box.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+    box.style.opacity = '1';
+    box.style.transform = 'scale(1)';
   }
 
   function checkCustomScroll() {
+    if (shown || closed) { return; }
     var scrollTop = window.scrollY || document.documentElement.scrollTop;
     var docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
     if (docHeight <= 0) { return; }
 
-    var scrollPercent = (scrollTop / docHeight) * 100;
-    if (scrollPercent >= 30 && !popupShown) {
+    if ((scrollTop / docHeight) * 100 >= SHOW_AT) {
       showCustomPopup();
     }
+  }
+
+  function closePopup() {
+    closed = true;
+    overlay.style.display = 'none';
+    window.removeEventListener('scroll', checkCustomScroll);
   }
 
   window.addEventListener('scroll', checkCustomScroll, { passive: true });
 
   var closeBtn = document.getElementById('popup-close-btn');
-  if (closeBtn) {
-    closeBtn.addEventListener('click', function() {
-      overlay.style.display = 'none';
-    });
-  }
-
-  overlay.addEventListener('click', function(event) {
-    if (event.target === this) {
-      this.style.display = 'none';
-    }
-  });
+  if (closeBtn) { closeBtn.addEventListener('click', closePopup); }
 })();
