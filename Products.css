@@ -54,7 +54,7 @@
 /* ===== Photo gallery ===== */
 #cw .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 7px; }
 @media (min-width: 768px) { #cw .grid { grid-template-columns: repeat(3, 1fr); } }
-#cw .grid div { aspect-ratio: 3/4; overflow: hidden; border-radius: 5px; cursor: pointer; background: #e2e8f0; }
+#cw .grid div { aspect-ratio: 4/3; overflow: hidden; border-radius: 5px; cursor: pointer; background: #e2e8f0; }
 #cw .grid img { width: 100%; height: 100%; object-fit: cover; transition: transform .3s; }
 #cw .grid div:hover img { transform: scale(1.05); }
 #cw .more { display: block; margin: 20px auto; background: #2563eb; color: #fff; padding: 12px 24px; border: 0; border-radius: 6px; font: 600 16px 'Hanuman', sans-serif; cursor: pointer; }
