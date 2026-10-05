@@ -95,3 +95,8 @@
   box-shadow: 0 3px 10px rgba(0,123,255,.3); animation: cw-pulse 2s infinite; transition: transform .2s; }
 #cw .tg-btn:hover { transform: translateY(-2px); }
 #cw .tg-btn svg { width: 20px; height: 20px; flex-shrink: 0; }
+
+#cw .opt { margin: 12px 0 0; font-size: 15px; line-height: 1.9; }
+#cw .opt b { color: #0f172a; }
+#cw #cw-sizes button { margin: 4px 6px 0 0; padding: 4px 14px; border: 1px solid #cbd5e1; border-radius: 6px; background: #fff; color: #0f172a; cursor: pointer; font: inherit; }
+#cw #cw-sizes button.on { background: #0f172a; color: #fff; border-color: #0f172a; }
