@@ -69,7 +69,7 @@ function closeReadingPopup() {
     shown = true;
     window.removeEventListener('scroll', checkCustomScroll);
 
-    if (overlay) overlay.style.display = 'none';
+    if (overlay) overlay.style.display = 'block';
     box.style.transform = 'scale(0.9) translateY(20px)';
     void box.offsetWidth;
     box.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
