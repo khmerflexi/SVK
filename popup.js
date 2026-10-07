@@ -1,8 +1,7 @@
-// === ផ្នែកទី១៖ Reading Popup (scroll 20%) ===
+/ === Reading Popup (scroll 20%) ===
 (function() {
   var popup = document.getElementById('reading-popup');
   if (!popup) return;
-
   var rpShown = false;
 
   function showReadingPopup() {
@@ -26,12 +25,9 @@
 
   window.addEventListener('scroll', checkReadingScroll, { passive: true });
 
-  // ✅ Click overlay to close
   document.addEventListener('click', function(e) {
     if (e.target === popup) closeReadingPopup();
   });
-
-  // ✅ ESC to close
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') closeReadingPopup();
   });
@@ -44,43 +40,47 @@ function closeReadingPopup() {
   setTimeout(function() { popup.style.display = 'none'; }, 400);
 }
 
-// === ផ្នែកទី២៖ Custom Popup (scroll 30%) — គ្មាន overlay ===
+// === Custom Popup (scroll 30%) — គ្មាន overlay ===
 (function() {
-  var box = document.getElementById('custom-popup-box');
+  var overlay = document.getElementById('custom-popup-overlay');
+  var box     = document.getElementById('custom-popup-box');
   if (!box) return;
 
-  var shown  = false;
-  var closed = false;
+  var shown = false, closed = false;
 
-  // ✅ លាក់ overlay ពេញ — show box តែមួយ
-  var overlay = document.getElementById('custom-popup-overlay');
+  // ✅ Override overlay — fixed corner transparent
   if (overlay) {
-    overlay.style.background    = 'transparent'; // ✅ គ្មាន dim
-    overlay.style.pointerEvents = 'none';        // ✅ click through
+    overlay.style.cssText =
+      'position:fixed!important;bottom:20px!important;right:20px!important;'
+      + 'z-index:99999!important;background:transparent!important;'
+      + 'display:none;pointer-events:none;width:auto;height:auto;'
+      + 'align-items:unset;justify-content:unset;';
   }
 
-  box.style.opacity  = '0';
-  box.style.animation = 'none';
-  // ✅ box ស្ថិតនៅ fixed corner — pointerEvents auto
   box.style.pointerEvents = 'auto';
-  box.style.position = 'fixed';
-  box.style.bottom   = '20px';
-  box.style.right    = '20px';
-  box.style.zIndex   = '99999';
+  box.style.opacity       = '0';
 
   function showCustomPopup() {
     if (shown || closed) return;
     shown = true;
     window.removeEventListener('scroll', checkCustomScroll);
 
-    // ✅ show overlay (transparent) + animate box
-    if (overlay) overlay.style.display = 'flex';
-
+    if (overlay) overlay.style.display = 'block';
     box.style.transform = 'scale(0.9) translateY(20px)';
     void box.offsetWidth;
     box.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
     box.style.opacity    = '1';
     box.style.transform  = 'scale(1) translateY(0)';
+  }
+
+  function closeCustomPopup() {
+    closed = true;
+    box.style.opacity   = '0';
+    box.style.transform = 'scale(0.9) translateY(20px)';
+    setTimeout(function() {
+      if (overlay) overlay.style.display = 'none';
+    }, 300);
+    window.removeEventListener('scroll', checkCustomScroll);
   }
 
   function checkCustomScroll() {
@@ -92,19 +92,12 @@ function closeReadingPopup() {
     if ((scrollTop / docHeight) * 100 >= 30) showCustomPopup();
   }
 
-  function closePopup() {
-    closed = true;
-    box.style.opacity   = '0';
-    box.style.transform = 'scale(0.9) translateY(20px)';
-    setTimeout(function() {
-      if (overlay) overlay.style.display = 'none';
-    }, 300);
-    window.removeEventListener('scroll', checkCustomScroll);
-  }
-
   window.addEventListener('scroll', checkCustomScroll, { passive: true });
 
   var closeBtn = document.getElementById('popup-close-btn');
-  if (closeBtn) closeBtn.addEventListener('click', closePopup);
+  if (closeBtn) closeBtn.addEventListener('click', closeCustomPopup);
 
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeCustomPopup();
+  });
 })();
