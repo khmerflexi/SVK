@@ -7,7 +7,7 @@
 .rp-close:hover{background:rgba(0,0,0,0.7)}
 .rp-banner{background:linear-gradient(135deg,#1a1a2e,#16213e);padding:20px 20px 16px}
 .rp-badge{background:#ff4400;color:#fff;font-size:13px;font-weight:700;padding:4px 12px;border-radius:20px;display:inline-block;margin-bottom:10px}
-.rp-img{width:100%;height:auto;object-fit:contain;margin:0 auto 8px;display:block;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.4))}
+.rp-img{width:100%;height:auto;object-fit:contain;margin:0 auto 8px;display:block;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.1))}
 .rp-name{color:#fff;font-size:14px;font-weight:600;margin-bottom:4px;opacity:0.9}
 .rp-body{padding:16px 20px 20px}
 .rp-price-row{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:14px}
