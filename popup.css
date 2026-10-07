@@ -6,7 +6,7 @@
   bottom: 20px;
   right: 20px;
   z-index: 99999;
-  background: transparent !important;
+  
   display: none;
   pointer-events: none;
   width: auto;
