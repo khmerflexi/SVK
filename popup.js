@@ -5,16 +5,20 @@
   var rpShown = false;
 
   function showReadingPopup() {
-    if (rpShown) return;
-    rpShown = true;
-    popup.style.display = 'flex';
-    popup.style.opacity = '0';
-    setTimeout(function() {
-      popup.style.transition = 'opacity 0.4s ease';
-      popup.style.opacity = '1';
-    }, 10);
-    window.removeEventListener('scroll', checkReadingScroll);
-  }
+  if (rpShown) return;
+  rpShown = true;
+  popup.style.display   = 'flex';
+  popup.style.background = 'transparent'; // ✅ លុប dim
+  popup.style.pointerEvents = 'none';     // ✅ click through
+  var box = document.getElementById('reading-popup-box');
+  if (box) box.style.pointerEvents = 'auto'; // ✅ box click OK
+  popup.style.opacity = '0';
+  setTimeout(function() {
+    popup.style.transition = 'opacity 0.4s ease';
+    popup.style.opacity = '1';
+  }, 10);
+  window.removeEventListener('scroll', checkReadingScroll);
+}
 
   function checkReadingScroll() {
     var scrollTop = window.scrollY || document.documentElement.scrollTop;
