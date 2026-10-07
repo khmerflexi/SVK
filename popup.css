@@ -44,25 +44,23 @@
 #popup-content { padding: 12px; }
 
 /* ✅ Reading popup */
+/* ✅ លុប overlay dim ចេញ — reading popup */
 #reading-popup {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.1);
+  background: transparent !important; /* ✅ លុប dim */
   z-index: 99999;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-end;   /* ✅ popup នៅខាងក្រោម */
+  justify-content: flex-end;
   padding: 20px;
+  pointer-events: none;    /* ✅ click through */
 }
+
 #reading-popup-box {
-  background: #fff;
-  border-radius: 16px;
-  max-width: 360px;
-  width: 100%;
-  text-align: center;
-  position: relative;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-  overflow: hidden;
+  pointer-events: auto;    /* ✅ box click ដំណើរការ */
+  max-width: 320px;
+  width: 90%;
 }
 .rp-close {
   position: absolute;
