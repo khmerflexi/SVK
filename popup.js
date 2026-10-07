@@ -11,7 +11,7 @@
   popup.style.background = 'transparent'; // ✅ លុប dim
   popup.style.pointerEvents = 'none';     // ✅ click through
   var box = document.getElementById('reading-popup-box');
-  if (box) box.style.pointerEvents = 'auto'; // ✅ box click OK
+  if (box) box.style.pointerEvents = 'none'; // ✅ box click OK
   popup.style.opacity = '0';
   setTimeout(function() {
     popup.style.transition = 'opacity 0.4s ease';
