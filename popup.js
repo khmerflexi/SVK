@@ -61,18 +61,20 @@ function closeReadingPopup() {
   box.style.opacity = '0';
   box.style.animation = 'none';
 
-  function showCustomPopup() {
-    shown = true;
-    window.removeEventListener('scroll', checkCustomScroll);
+function showCustomPopup() {
+  shown = true;
+  window.removeEventListener('scroll', checkCustomScroll);
 
-    overlay.style.display = 'flex';
-    box.style.transform = 'scale(0.9)';
-    void box.offsetWidth; // បង្ខំ browser គណនា style មុន
+  overlay.style.display = 'flex';
+  overlay.style.background = 'transparent'; // ✅ លុប overlay
 
-    box.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-    box.style.opacity = '1';
-    box.style.transform = 'scale(1)';
-  }
+  box.style.transform = 'scale(0.9)';
+  void box.offsetWidth;
+
+  box.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+  box.style.opacity = '1';
+  box.style.transform = 'scale(1)';
+}
 
   function checkCustomScroll() {
     if (shown || closed) { return; }
