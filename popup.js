@@ -4,7 +4,7 @@
   if (!popup) return;
   var rpShown = false;
 
-  function showReadingPopup() {
+  function showDgsarPopup() {
     if (rpShown) return;
     rpShown = true;
     popup.style.display = 'flex';
@@ -13,27 +13,27 @@
       popup.style.transition = 'opacity 0.4s ease';
       popup.style.opacity = '1';
     }, 10);
-    window.removeEventListener('scroll', checkReadingScroll);
+    window.removeEventListener('scroll', checkDgsarScroll);
   }
 
-  function checkReadingScroll() {
+  function checkDgsarScroll() {
     var scrollTop = window.scrollY || document.documentElement.scrollTop;
     var docHeight = document.documentElement.scrollHeight - window.innerHeight;
     if (docHeight <= 0) return;
-    if ((scrollTop / docHeight) * 100 >= 20) showReadingPopup();
+    if ((scrollTop / docHeight) * 100 >= 20) showDgsarPopup();
   }
 
-  window.addEventListener('scroll', checkReadingScroll, { passive: true });
+  window.addEventListener('scroll', checkDgsarScroll, { passive: true });
 
   document.addEventListener('click', function(e) {
-    if (e.target === popup) closeReadingPopup();
+    if (e.target === popup) closeDgsarPopup();
   });
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeReadingPopup();
+    if (e.key === 'Escape') closeDgsarPopup();
   });
 })();
 
-function closeReadingPopup() {
+function closeDgsarPopup() {
   var popup = document.getElementById('dgsar-popup');
   if (!popup) return;
   popup.style.opacity = '0';
