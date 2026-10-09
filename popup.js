@@ -1,41 +1,37 @@
-// === ផ្នែកទី១៖ Dgsar Popup (scroll 20%) ===
 (function() {
-  var popup = document.getElementById('dgsar-popup');
-  if (!popup) return;
-  var rpShown = false;
+  // ✅ Post page check — ត្រូវប្រាកដថា URL មាន .html
+  var isPost = window.location.pathname.indexOf('.html') !== -1;
+  if (!isPost) { return; }
 
-  function showDgsarPopup() {
-    if (rpShown) return;
-    rpShown = true;
+  // ✅ Show once per session
+  if (sessionStorage.getItem('rpShown')) { return; }
+
+  var popup = document.getElementById('reading-popup');
+  if (!popup) { return; }
+
+  // ⏱ ប្តូរលេខនេះ: 3000 = 3 វិនាទី (សម្រាប់តេស្ត) → ប្តូរទៅ 30000 ពេលប្រើពិត
+  setTimeout(function() {
     popup.style.display = 'flex';
     popup.style.opacity = '0';
     setTimeout(function() {
       popup.style.transition = 'opacity 0.4s ease';
       popup.style.opacity = '1';
     }, 10);
-    window.removeEventListener('scroll', checkDgsarScroll);
-  }
-
-  function checkDgsarScroll() {
-    var scrollTop = window.scrollY || document.documentElement.scrollTop;
-    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    if (docHeight <= 0) return;
-    if ((scrollTop / docHeight) * 100 >= 20) showDgsarPopup();
-  }
-
-  window.addEventListener('scroll', checkDgsarScroll, { passive: true });
+    sessionStorage.setItem('rpShown', '1');
+  }, 3000);
 
   document.addEventListener('click', function(e) {
-    if (e.target === popup) closeDgsarPopup();
+    if (e.target === popup) { closeReadingPopup(); }
   });
+
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeDgsarPopup();
+    if (e.key === 'Escape') { closeReadingPopup(); }
   });
 })();
 
-function closeDgsarPopup() {
-  var popup = document.getElementById('dgsar-popup');
-  if (!popup) return;
+function closeReadingPopup() {
+  var popup = document.getElementById('reading-popup');
+  if (!popup) { return; }
   popup.style.opacity = '0';
   setTimeout(function() { popup.style.display = 'none'; }, 400);
 }
