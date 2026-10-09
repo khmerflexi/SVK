@@ -1,11 +1,12 @@
-/ === dgsar Popup (scroll 20%) ===
+// === ផ្នែកទី១៖ កូដ Reading Popup (លោតពេល Scroll បាន 20% រាល់ពេល Refresh) ===
 (function() {
-  var popup = document.getElementById('dgsar-popup');
-  if (!popup) return;
-  var rpShown = false;
+  var popup = document.getElementById('reading-popup');
+  if (!popup) { return; }
 
-  function showdgsarPopup() {
-    if (rpShown) return;
+  var rpShown = false; // ចងចាំតែក្នុងទំព័រនេះ (បាត់ពេល Refresh)
+
+  function showReadingPopup() {
+    if (rpShown) { return; }
     rpShown = true;
     popup.style.display = 'flex';
     popup.style.opacity = '0';
@@ -13,91 +14,87 @@
       popup.style.transition = 'opacity 0.4s ease';
       popup.style.opacity = '1';
     }, 10);
-    window.removeEventListener('scroll', checkdgsarScroll);
+    window.removeEventListener('scroll', checkReadingScroll);
   }
 
-  function checkdgsarScroll() {
+  function checkReadingScroll() {
     var scrollTop = window.scrollY || document.documentElement.scrollTop;
     var docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    if (docHeight <= 0) return;
-    if ((scrollTop / docHeight) * 100 >= 20) showdgsarPopup();
+    if (docHeight <= 0) { return; }
+
+    var scrolledPercent = (scrollTop / docHeight) * 100;
+    if (scrolledPercent >= 20) {
+      showReadingPopup();
+    }
   }
 
-  window.addEventListener('scroll', checkdgsarScroll, { passive: true });
+  window.addEventListener('scroll', checkReadingScroll, { passive: true });
 
   document.addEventListener('click', function(e) {
-    if (e.target === popup) closedgsarPopup();
+    if (e.target === popup) { closeReadingPopup(); }
   });
+
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closedgsarPopup();
+    if (e.key === 'Escape') { closeReadingPopup(); }
   });
 })();
 
-function closedgsarPopup() {
-  var popup = document.getElementById('dgsar-popup');
-  if (!popup) return;
+function closeReadingPopup() {
+  var popup = document.getElementById('reading-popup');
+  if (!popup) { return; }
   popup.style.opacity = '0';
   setTimeout(function() { popup.style.display = 'none'; }, 400);
 }
 
-// === Custom Popup (scroll 30%) — គ្មាន overlay ===
+
+// === ផ្នែកទី២៖ កូដ Custom Popup (លោតពេល Scroll បាន 30%) ===
+
 (function() {
   var overlay = document.getElementById('custom-popup-overlay');
-  var box     = document.getElementById('custom-popup-box');
-  if (!box) return;
+  var box = document.getElementById('custom-popup-box');
+  if (!overlay || !box) { return; }
 
-  var shown = false, closed = false;
+  var SHOW_AT = 30; // % scroll
+  var shown = false;
+  var closed = false;
 
-  // ✅ Override overlay — fixed corner transparent
-  if (overlay) {
-    overlay.style.cssText =
-      'position:fixed!important;bottom:20px!important;right:20px!important;'
-      + 'z-index:99999!important;background:transparent!important;'
-      + 'display:none;pointer-events:none;width:auto;height:auto;'
-      + 'align-items:unset;justify-content:unset;';
-  }
+  box.style.opacity = '0';
+  box.style.animation = 'none';
 
-  box.style.pointerEvents = 'auto';
-  box.style.opacity       = '0';
+function showCustomPopup() {
+  shown = true;
+  window.removeEventListener('scroll', checkCustomScroll);
 
-  function showCustomPopup() {
-    if (shown || closed) return;
-    shown = true;
-    window.removeEventListener('scroll', checkCustomScroll);
+  overlay.style.display = 'flex';
+  overlay.style.background = 'transparent'; // ✅ លុប overlay
 
-    if (overlay) overlay.style.display = 'block';
-    box.style.transform = 'scale(0.9) translateY(20px)';
-    void box.offsetWidth;
-    box.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-    box.style.opacity    = '1';
-    box.style.transform  = 'scale(1) translateY(0)';
-  }
+  box.style.transform = 'scale(0.9)';
+  void box.offsetWidth;
 
-  function closeCustomPopup() {
-    closed = true;
-    box.style.opacity   = '0';
-    box.style.transform = 'scale(0.9) translateY(20px)';
-    setTimeout(function() {
-      if (overlay) overlay.style.display = 'none';
-    }, 300);
-    window.removeEventListener('scroll', checkCustomScroll);
-  }
+  box.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+  box.style.opacity = '1';
+  box.style.transform = 'scale(1)';
+}
 
   function checkCustomScroll() {
-    if (shown || closed) return;
+    if (shown || closed) { return; }
     var scrollTop = window.scrollY || document.documentElement.scrollTop;
-    var docHeight = document.documentElement.scrollHeight
-                  - document.documentElement.clientHeight;
-    if (docHeight <= 0) return;
-    if ((scrollTop / docHeight) * 100 >= 30) showCustomPopup();
+    var docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    if (docHeight <= 0) { return; }
+
+    if ((scrollTop / docHeight) * 100 >= SHOW_AT) {
+      showCustomPopup();
+    }
+  }
+
+  function closePopup() {
+    closed = true;
+    overlay.style.display = 'none';
+    window.removeEventListener('scroll', checkCustomScroll);
   }
 
   window.addEventListener('scroll', checkCustomScroll, { passive: true });
 
   var closeBtn = document.getElementById('popup-close-btn');
-  if (closeBtn) closeBtn.addEventListener('click', closeCustomPopup);
-
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeCustomPopup();
-  });
+  if (closeBtn) { closeBtn.addEventListener('click', closePopup); }
 })();
