@@ -1,10 +1,10 @@
-// === Reading Popup (scroll 20%) ===
+/ === dgsar Popup (scroll 20%) ===
 (function() {
-  var popup = document.getElementById('reading-popup');
+  var popup = document.getElementById('dgsar-popup');
   if (!popup) return;
   var rpShown = false;
 
-  function showReadingPopup() {
+  function showdgsarPopup() {
     if (rpShown) return;
     rpShown = true;
     popup.style.display = 'flex';
@@ -13,28 +13,28 @@
       popup.style.transition = 'opacity 0.4s ease';
       popup.style.opacity = '1';
     }, 10);
-    window.removeEventListener('scroll', checkReadingScroll);
+    window.removeEventListener('scroll', checkdgsarScroll);
   }
 
-  function checkReadingScroll() {
+  function checkdgsarScroll() {
     var scrollTop = window.scrollY || document.documentElement.scrollTop;
     var docHeight = document.documentElement.scrollHeight - window.innerHeight;
     if (docHeight <= 0) return;
-    if ((scrollTop / docHeight) * 100 >= 20) showReadingPopup();
+    if ((scrollTop / docHeight) * 100 >= 20) showdgsarPopup();
   }
 
-  window.addEventListener('scroll', checkReadingScroll, { passive: true });
+  window.addEventListener('scroll', checkdgsarScroll, { passive: true });
 
   document.addEventListener('click', function(e) {
-    if (e.target === popup) closeReadingPopup();
+    if (e.target === popup) closedgsarPopup();
   });
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeReadingPopup();
+    if (e.key === 'Escape') closedgsarPopup();
   });
 })();
 
-function closeReadingPopup() {
-  var popup = document.getElementById('reading-popup');
+function closedgsarPopup() {
+  var popup = document.getElementById('dgsar-popup');
   if (!popup) return;
   popup.style.opacity = '0';
   setTimeout(function() { popup.style.display = 'none'; }, 400);
