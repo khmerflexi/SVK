@@ -1,149 +1,126 @@
-/* =========================================
-   ១. dgsar POPUP (លោតពេល scroll 20%)
-   ========================================= */
-#dgsar-popup{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.0);z-index:99999;align-items:center;justify-content:center;padding:20px}
-#dgsar-popup-box{background:#fff;border-radius:16px;max-width:360px;width:100%;max-height:92vh;overflow-y:auto;text-align:center;position:relative;box-shadow:0 10px 40px rgba(0,0,0,0.3);font-family:'Kantumruy Pro',sans-serif}
-dg-close{position:absolute;top:10px;right:12px;font-size:18px;cursor:pointer;color:#fff;background:rgba(0,0,0,0.4);border:none;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:10}
-dg-close:hover{background:rgba(0,0,0,0.0)}
-dg-banner{background:linear-gradient(135deg,#1a1a2e,#16213e);padding:20px 20px 16px}
-dg-badge{background:#ff4400;color:#fff;font-size:13px;font-weight:700;padding:4px 12px;border-radius:20px;display:inline-block;margin-bottom:10px}
-dg-img{width:100%;height:auto;object-fit:contain;margin:0 auto 8px;display:block;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.4))}
-dg-name{color:#fff;font-size:14px;font-weight:600;margin-bottom:4px;opacity:0.9}
-dg-body{padding:16px 20px 20px}
-dg-price-row{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:14px}
-dg-new-price{font-size:28px;font-weight:700;color:#ff6f00}
-dg-old-price{font-size:16px;color:#999;text-decoration:line-through}
-dg-discount{background:#ff4400;color:#fff;font-size:12px;font-weight:700;padding:3px 8px;border-radius:6px}
-dg-btn-tg{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px;background:#0088cc;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Kantumruy Pro',sans-serif;text-decoration:none;margin-bottom:8px;transition:background 0.2s;box-sizing:border-box}
-dg-btn-tg:hover{background:#006699}
-dg-btn-view{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:11px;background:transparent;color:#ff6f00;border:2px solid #ff6f00;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Kantumruy Pro',sans-serif;text-decoration:none;margin-bottom:8px;transition:all 0.2s;box-sizing:border-box}
-dg-btn-view:hover{background:#ff6f00;color:#fff}
-dg-btn-skip{font-size:13px;color:#171717;cursor:pointer;background:none;border:none;font-family:'Kantumruy Pro',sans-serif;padding:4px}
-dg-btn-skip:hover{color:#555}
+@import url('https://fonts.googleapis.com/css2?family=Bayon&family=Moul&display=swap');
 
-/* =========================================
-   ២. CUSTOM POPUP (លោតពេល scroll 30%)
-   ========================================= */
-/* ផ្ទៃ container (គ្មានពណ៌ខ្មៅ) */
+/* ✅ លាក់ overlay ទាំងស្រុង */
 #custom-popup-overlay {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 99999;
+  background: transparent !important;
+  display: none;
+  pointer-events: none;
+  width: auto;
+  height: auto;
+  align-items: unset;
+  justify-content: unset;
+}
+
+/* ✅ Custom popup box */
+#custom-popup-box {
+  pointer-events: auto;
+  max-width: 300px;
+  width: 90vw;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+  overflow: hidden;
+  position: relative;
+}
+
+#popup-close-btn {
+  position: absolute;
+  top: 8px; right: 10px;
+  font-size: 22px;
+  cursor: pointer;
+  color: #fff;
+  background: rgba(0,0,0,0.4);
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 10;
+  line-height: 1;
+}
+#popup-content img { width: 100%; border-radius: 5px 5px 0 0; }
+#popup-content { padding: 12px; }
+
+/* ✅ Reading popup */
+#reading-popup {
   display: none;
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: transparent;
-  z-index: 9999;
-  justify-content: center;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 99999;
   align-items: center;
-  padding: 15px;
-  box-sizing: border-box;
-  pointer-events: none; /* អាច scroll/ចុចទំព័រខាងក្រោយបាន */
-}
-
-#custom-popup-box {
-  pointer-events: auto; /* ប្រអប់ចុចបាន */
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35); /* ស្រមោលឱ្យលេចធ្លោ ព្រោះគ្មាន overlay */
-}
-
-#custom-popup-box {
-  background: #fff;
+  justify-content: center;
   padding: 20px;
+}
+#reading-popup-box {
+  background: #fff;
+  border-radius: 16px;
+  max-width: 360px;
   width: 100%;
-  max-width: 500px;
-  max-height: 92vh;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  border-radius: 12px;
-  position: relative;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
   text-align: center;
-  box-sizing: border-box;
-  font-family: 'Kantumruy Pro', sans-serif;
-  animation: popupFadeIn 0.3s ease;
+  position: relative;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+  overflow: hidden;
 }
-
-@keyframes popupFadeIn {
-  from {transform: scale(0.8); opacity: 0;}
-  to {transform: scale(1); opacity: 1;}
+.rp-close {
+  position: absolute;
+  top: 10px; right: 12px;
+  font-size: 20px; cursor: pointer;
+  color: #fff; background: rgba(0,0,0,0.4);
+  border: none; width: 30px; height: 30px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
 }
-
-/* រូបភាពក្នុង popup */
-#custom-popup-box img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-  border-radius: 8px;
+.rp-banner {
+  background: linear-gradient(135deg,#1a1a2e,#16213e);
+  padding: 20px 20px 16px;
 }
-
-/* ប៊ូតុងបិទ (Close X) — នៅលើជ្រុងរូបភាព */
-
-/* ប៊ូតុងបិទ — ដូចរចនាបថ Watch popup */
-/* ប៊ូតុងបិទ — ដូចរចនាបថ Watch popup */
-#custom-popup-box #popup-close-btn {
-  position: absolute !important;
-  top: 10px !important;
-  right: 12px !important;
-  width: 30px !important;
-  height: 30px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  font-family: Arial, sans-serif !important;
-  font-size: 18px !important;
-  line-height: 1 !important;
-  font-weight: normal !important;
-  color: #fff !important;
-  background: rgba(0, 0, 0, 0.4) !important;
-  border: none !important;
-  border-radius: 50% !important;
-  cursor: pointer !important;
-  z-index: 10 !important;
+.rp-badge {
+  background: #ff4400; color: #fff;
+  font-size: 13px; font-weight: 700;
+  padding: 4px 12px; border-radius: 20px;
+  display: inline-block; margin-bottom: 10px;
 }
-#custom-popup-box #popup-close-btn:hover {
-  background: rgba(0, 0, 0, 0.3) !important;
+.rp-img-wrap {
+  width: 100%; aspect-ratio: 16/9;
+  overflow: hidden; margin-bottom: 8px;
 }
-/* Bed room & Bath room */
-.sidebar-property-features {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px 20px;
-  margin: 10px 0 15px 0;
-  font-size: 14px;
-  font-weight: 600;
-  color: #444;
+.rp-img { width: 100%; height: 100%; object-fit: cover; }
+.rp-name { color: #fff; font-size: 14px; font-weight: 600; }
+.rp-body { padding: 16px 20px 20px; font-family: 'Kantumruy Pro', sans-serif; }
+.rp-price-row {
+  display: flex; align-items: center;
+  justify-content: center; gap: 10px; margin-bottom: 14px;
 }
-.sidebar-property-features span {
-  background: #f4f4f4;
-  padding: 5px 12px;
-  border-radius: 20px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
+.rp-new-price { font-size: 28px; font-weight: 700; color: #ff6f00; }
+.rp-old-price { font-size: 16px; color: #999; text-decoration: line-through; }
+.rp-discount {
+  background: #ff4400; color: #fff;
+  font-size: 12px; font-weight: 700;
+  padding: 3px 8px; border-radius: 6px;
 }
-.sidebar-property-features i {
-  color: #ff5722;
+.rp-btn-tg {
+  display: flex; align-items: center; justify-content: center;
+  gap: 8px; width: 100%; padding: 12px;
+  background: #0088cc; color: #fff; border: none;
+  border-radius: 10px; font-size: 15px; font-weight: 700;
+  cursor: pointer; text-decoration: none;
+  margin-bottom: 8px; box-sizing: border-box;
 }
-
-/* =========================================
-   ៣. MOBILE RESPONSIVE
-   ========================================= */
-@media (max-width: 480px) {
-  #dgsar-popup-box { max-width: 320px; }
-  dg-new-price { font-size: 24px; }
-
-  #custom-popup-box { padding: 14px; }
-
-  #custom-popup-box #popup-close-btn {
-    top: 10px !important;
-    right: 12px !important;
-    width: 30px !important;
-    height: 30px !important;
-    font-size: 18px !important;
-  }
-
-  .sidebar-property-features { font-size: 13px; gap: 8px 12px; }
+.rp-btn-tg:hover { background: #006699; }
+.rp-btn-view {
+  display: flex; align-items: center; justify-content: center;
+  gap: 8px; width: 100%; padding: 11px;
+  background: transparent; color: #ff6f00;
+  border: 2px solid #ff6f00; border-radius: 10px;
+  font-size: 14px; font-weight: 700;
+  cursor: pointer; text-decoration: none;
+  margin-bottom: 8px; box-sizing: border-box;
 }
-
-
-
+.rp-btn-view:hover { background: #ff6f00; color: #fff; }
+.rp-btn-skip {
+  font-size: 13px; color: #aaa;
+  cursor: pointer; background: none; border: none;
+}
