@@ -1,12 +1,13 @@
+
 (function() {
   // ✅ Post page check — ត្រូវប្រាកដថា URL មាន .html
   var isPost = window.location.pathname.indexOf('.html') !== -1;
   if (!isPost) { return; }
 
   // ✅ Show once per session
-  if (sessionStorage.getItem('rpShown')) { return; }
+  if (sessionStorage.getItem('dgShown')) { return; }
 
-  var popup = document.getElementById('reading-popup');
+  var popup = document.getElementById('dgsar-popup');
   if (!popup) { return; }
 
   // ⏱ ប្តូរលេខនេះ: 3000 = 3 វិនាទី (សម្រាប់តេស្ត) → ប្តូរទៅ 30000 ពេលប្រើពិត
@@ -17,20 +18,20 @@
       popup.style.transition = 'opacity 0.4s ease';
       popup.style.opacity = '1';
     }, 10);
-    sessionStorage.setItem('rpShown', '1');
+    sessionStorage.setItem('dgShown', '1');
   }, 3000);
 
   document.addEventListener('click', function(e) {
-    if (e.target === popup) { closeReadingPopup(); }
+    if (e.target === popup) { closeDgsarPopup(); }
   });
 
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') { closeReadingPopup(); }
+    if (e.key === 'Escape') { closeDgsarPopup(); }
   });
 })();
 
-function closeReadingPopup() {
-  var popup = document.getElementById('reading-popup');
+function closeDgsarPopup() {
+  var popup = document.getElementById('dgsar-popup');
   if (!popup) { return; }
   popup.style.opacity = '0';
   setTimeout(function() { popup.style.display = 'none'; }, 400);
