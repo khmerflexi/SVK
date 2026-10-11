@@ -3,7 +3,7 @@
 #ebookOverlay #page-content{transition:transform .35s ease,opacity .35s ease;font-size:18px;line-height:1.8;color:#333;text-align:left;}
 #ebookOverlay #page-content h1,#ebookOverlay #page-content h2,#ebookOverlay #page-content h3{color:#8a5a2b;font-size:22px;font-weight:500;line-height:1.5;margin:0 0 14px;}
 #ebookOverlay #page-content p{margin:0 0 12px;}
-
+#ebookOverlay #page-content h2:not(:empty)::after{content:"";display:block;width:60px;height:2px;margin:10px auto 0;background:#d8c9b0;}
 /* ប៊ូតុងជ្រុងខាងលើ */
 #ebookOverlay #closeBookBtn,#ebookOverlay #tocBtn{position:absolute;top:12px;z-index:10002;width:38px;height:38px;padding:0;border:none;border-radius:50%;background:#8a5a2b;color:#fff;font-size:18px;cursor:pointer;font-family:inherit;}
 #ebookOverlay #closeBookBtn{right:12px;}
