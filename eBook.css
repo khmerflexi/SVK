@@ -1,0 +1,30 @@
+#ebookOverlay #bookFrame{position:relative;display:flex;flex-direction:column;width:100%;height:100%;background:#fffdf5;overflow:hidden;box-sizing:border-box;}
+#ebookOverlay #ebook-page{flex:1;min-height:0;overflow-y:auto;padding:68px 26px 18px;box-sizing:border-box;touch-action:pan-y;-webkit-overflow-scrolling:touch;}
+#ebookOverlay #page-content{transition:transform .35s ease,opacity .35s ease;font-size:18px;line-height:1.8;color:#333;text-align:left;}
+#ebookOverlay #page-content h1,#ebookOverlay #page-content h2,#ebookOverlay #page-content h3{color:#8a5a2b;font-size:22px;font-weight:500;line-height:1.5;margin:0 0 14px;}
+#ebookOverlay #page-content p{margin:0 0 12px;}
+
+/* ប៊ូតុងជ្រុងខាងលើ */
+#ebookOverlay #closeBookBtn,#ebookOverlay #tocBtn{position:absolute;top:12px;z-index:10002;width:38px;height:38px;padding:0;border:none;border-radius:50%;background:#8a5a2b;color:#fff;font-size:18px;cursor:pointer;font-family:inherit;}
+#ebookOverlay #closeBookBtn{right:12px;}
+#ebookOverlay #tocBtn{left:12px;}
+#ebookOverlay #bookmarkRibbon{position:absolute;top:0;right:58px;width:34px;height:50px;padding:0;border:none;cursor:pointer;z-index:10002;background:#c9c9c9;clip-path:polygon(0 0,100% 0,100% 100%,50% 78%,0 100%);transition:background .25s;}
+
+/* Footer */
+#ebookOverlay #bookFooter{flex:none;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));border-top:1px solid #eadfc9;background:#fffdf5;}
+#ebookOverlay #bookFooter button{padding:10px 16px;border:none;border-radius:10px;background:#efe3d0;color:#8a5a2b;font-size:15px;cursor:pointer;font-family:inherit;}
+#ebookOverlay #bookFooter button:disabled{opacity:.4;cursor:default;}
+#ebookOverlay #pageNum{color:#888;font-size:15px;}
+
+/* មាតិកា */
+#ebookOverlay #tocPanel{display:none;position:absolute;inset:0;z-index:10000;background:#fffdf5;padding:68px 22px 30px;box-sizing:border-box;overflow-y:auto;touch-action:pan-y;}
+#ebookOverlay #tocPanel h3{margin:0 0 14px;color:#8a5a2b;font-size:20px;}
+.toc-item{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:13px 8px;border-bottom:1px dashed #d8c9b0;cursor:pointer;font-size:17px;color:#444;}
+.toc-item:hover{background:#f5ecdc;}
+.toc-item.active{color:#2b6fd8;font-weight:bold;background:#eef4ff;}
+.toc-item .toc-num{color:#8a5a2b;font-size:14px;white-space:nowrap;}
+
+/* Desktop / Laptop: ទំហំដូចទូរស័ព្ទ ជាកាតមូលជ្រុង នៅកណ្តាលអេក្រង */
+@media (min-width:701px){
+  #ebookOverlay #bookFrame{width:440px;max-width:92vw;height:90vh;max-height:800px;border-radius:24px;box-shadow:0 15px 50px rgba(0,0,0,.4);}
+}
