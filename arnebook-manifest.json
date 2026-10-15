@@ -1,0 +1,22 @@
+{
+  "name": "អាន eBook",
+  "short_name": "arnebook",
+  "description": "arnebook អាន eBook — បណ្ណាល័យឌីជីថលនៅក្នុងដៃអ្នក! យើងផ្តល់ជូននូវសៀវភៅអប់រំ ចំណេះដឹងទូទៅ និងស្នាដៃអក្សរសិល្ប៍ខ្មែរប្រកបដោយគុណភាព ដើម្បីបំផុសទម្លាប់អាន និងអភិវឌ្ឍប្រាជ្ញាញាណយុវជនខ្មែរ។",
+  "start_url": "/?utm_source=pwa",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#fff",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj4ymi_SMJanJWo4BDBm1wycMtwBuddWsig_EcHQKAj5CnBMYlAquNKo6y6dVyFGdPx-16rUkAfjEFxJ10NeYxrXoi39-XumipY3Lqv_66M8mJ7ug9zm3QlRXtOD52gX6US9T6p2fkz95n8f9TCxwOusBdfaa6olvwPRCitV8tojDhb8L75avi0w_-eRBA/s1600/Arnebook-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhmR0DKZ3EbciTVjpdyBhloRAhZYF8Cu_KyLqxi0LkYILVVqui_-Df0p3p406Wb9ZwW9LE_2T_ZyX4Essni8RWPItDZeslck0H1kDJsfDZAE-fiJv0wncwW_8iQo3nTFBTiMi91sRIYwJqcW12aFuFIK2t8B8-80eVP26wRkp-SDVzgCBf0dB6-N6f2dYE/s1600/Arnebook-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
