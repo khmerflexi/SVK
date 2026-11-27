@@ -1,0 +1,60 @@
+  /* ===== សៀវភៅរូប-ពាក្យ (ចុចរូប → អាន) ===== */
+.hito-toc .kid-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:16px 0}
+.hito-toc .kid-card{display:block;padding:0;border:3px solid transparent;border-radius:9px;background:#fff;box-shadow:0 3px 10px rgba(0,0,0,.15);overflow:hidden;cursor:pointer;font:inherit;text-align:center;-webkit-tap-highlight-color:transparent;transition:transform .15s,border-color .15s}
+.hito-toc .kid-card:active{transform:scale(.96)}
+.hito-toc .kid-card.on{border-color:#1a6dff}
+.hito-toc .kid-card img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}
+.hito-toc .kid-word{display:block;padding:12px 6px 14px;font-family:"Moul","Battambang",serif;font-size:30px;line-height:1.5;color:#222}
+.hito-toc .kid-card.on .kid-word{color:#1a6dff}
+.hito-toc .kid-card audio{display:none}
+@media(min-width:700px){.hito-toc .kid-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+  
+  /* ===== Text reading (ប៊ូតុង 🔊 + ប្រយោគ) ===== */
+.hito-toc .say-list{margin:18px 0}
+.hito-toc .say-row{display:flex;align-items:center;gap:16px;width:100%;margin:0 0 14px;padding:6px;border:0;border-radius:18px;background:transparent;font:inherit;text-align:left;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.hito-toc .say-ico{flex:none;display:flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:42% 58% 55% 45% / 50% 45% 55% 50%;background:#00d68f;transition:transform .15s,background .15s}
+.hito-toc .say-ico svg{width:30px;height:30px;fill:#fff}
+.hito-toc .say-txt{font-size:26px;line-height:1.6;color:#222}
+.hito-toc .say-row:active .say-ico{transform:scale(.92)}
+.hito-toc .say-row.on .say-ico{background:#1a6dff}
+.hito-toc .say-row.on .say-txt{color:#1a6dff}
+.hito-toc .say-row audio{display:none}
+.hito-toc .say-row{display:block;overflow:hidden}
+.hito-toc .say-ico{float:left;width:48px;height:48px;margin:4px 12px 0 0}
+.hito-toc .say-ico svg{width:24px;height:24px}
+.hito-toc .say-txt{display:block;font-size:24px;line-height:1.7;min-width:0}
+  
+  
+  /* ===== តារាងពាក្យ ===== */
+.hito-toc .tbl-wrap{margin:16px 0;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.hito-toc .tbl{width:100%;min-width:0;border-collapse:collapse;table-layout:fixed;font-size:18px;line-height:1.6;background:#fafafa}
+.hito-toc .tbl th,.hito-toc .tbl td{padding:14px 10px;text-align:left;vertical-align:top;border-top:1px solid #e3e3e3;overflow-wrap:anywhere;word-break:normal}
+.hito-toc .tbl tr:first-child th,.hito-toc .tbl tr:first-child td{border-top:0}
+.hito-toc .tbl th{font-family:"Moul","Battambang",serif;font-weight:normal;font-size:16px;color:var(--accent);border-bottom:2px solid var(--accent)}
+.hito-toc .tbl .c-km{width:26%;font-size:22px}
+.hito-toc .tbl .c-lat{width:34%;font-style:italic;color:#333}
+.hito-toc .tbl .c-en{width:40%;color:#222}
+@media(max-width:480px){
+  .hito-toc .tbl{font-size:16px}
+  .hito-toc .tbl .c-km{font-size:19px}
+  .hito-toc .tbl th,.hito-toc .tbl td{padding:12px 6px}
+}
+  
+.hito-toc .kid-card{display:flex;flex-direction:column;justify-content:flex-start;align-items:stretch;height:100%}
+.hito-toc .kid-card img{flex:none;display:block;width:100%;aspect-ratio:4/3;height:auto;object-fit:cover;margin:0;padding:0}
+.hito-toc .kid-word{flex:1;display:flex;align-items:center;justify-content:center;padding:12px 6px 14px;font-size:18px;line-height:1.5}
+.hito-toc .kid-grid{align-items:stretch}  
+.hito-toc .say-txt br{display:inline}  
+  
+.hito-toc .say-txt{display:block}
+.hito-toc .say-line{display:block;margin:0 0 6px}
+.hito-toc .say-line .who{color:#00a874;margin-right:4px}
+.hito-toc .say-row.on .say-line .who{color:#1a6dff} 
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+.hito-toc .say-line .rom{
+  display:block;
+  font-family:'Courier Prime:ital',Georgia,serif;
+  font-style:italic;
+  font-size:.85em;
+  line-height:1.5;
+  font-weight:300;
